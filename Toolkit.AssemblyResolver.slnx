@@ -2,7 +2,7 @@
   <Configurations>
     <Platform Name="x64" />
   </Configurations>
-  <Folder Name="/Solution Items/">
+  <Folder Name="/solutionItems/">
     <File Path=".gitattributes" />
     <File Path=".gitignore" />
     <File Path="CHANGELOG.md" />
@@ -10,9 +10,30 @@
     <File Path="global.json" />
     <File Path="LICENSE" />
     <File Path="README.md" />
+    <File Path="AGENTS.md" />
+    <File Path="CONTRIBUTING.md" />
+    <File Path="NuGet.config" />
+    <File Path=".editorconfig" />
   </Folder>
-  <Folder Name="/tests/" />
+  <Folder Name="/tests/">
+    <Project Path="tests/Toolkit.AssemblyResolver.Tests/Toolkit.AssemblyResolver.Tests.csproj" />
+  </Folder>
   <Project Path="src/Toolkit.AssemblyResolver/Toolkit.AssemblyResolver.csproj">
     <Platform Project="x64" />
   </Project>
+  <Folder Name="/docs/">
+    <File Path="docs/repository.md" />
+  </Folder>
+  <Folder Name="/docs/policies/">
+    <File Path="docs/policies/development.md" />
+  </Folder>
+  <Folder Name="/solutionItems/.github/" />
+  <Folder Name="/solutionItems/.github/workflows/">
+    <File Path=".github/workflows/build-and-test.yml" />
+    <File Path=".github/workflows/publish-nuget.yml" />
+    <File Path=".github/workflows/repository-policy.yml" />
+  </Folder>
+  <Folder Name="/solutionItems/scripts/">
+    <File Path="scripts/Validate-Repository.ps1" />
+  </Folder>
 </Solution>
