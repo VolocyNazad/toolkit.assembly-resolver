@@ -56,3 +56,5 @@ The automated test suite is in `tests/Toolkit.AssemblyResolver.Tests` and verifi
 ## Versioning and release tags
 
 The library uses MinVer 8 with stable tags in the `vMAJOR.MINOR.PATCH` format. The tag without its `v` prefix is the NuGet package version. Manual publishing accepts exactly one matching tag at HEAD and verifies the package ID and version before pushing to NuGet.
+
+The tagged commit must already contain the release section in `CHANGELOG.md` with an empty `Unreleased` section above it; the publish workflow stops otherwise. See the [release changelog policy](policies/development.md#release-changelog).
