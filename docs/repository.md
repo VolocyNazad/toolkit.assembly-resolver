@@ -12,6 +12,8 @@ Read and follow the [development policy](policies/development.md) alongside this
 - `Toolkit.AssemblyResolver.slnx` - solution.
 - `src/Toolkit.AssemblyResolver/` - library, `ResolveHelper`, and `UnsafeDomainAccessors`.
 - `Directory.Build.props` - shared compiler settings and MinVer configuration properties.
+- `Directory.Packages.props` - central package versions for the library.
+- `tests/Directory.Packages.props` - test-only package versions, importing the root file.
 - `global.json` - .NET SDK selection.
 - `.github/workflows/` - CI and publishing workflows.
 
@@ -21,7 +23,7 @@ Read and follow the [development policy](policies/development.md) alongside this
 - `global.json` requests SDK `10.0.103`, allows roll-forward within the 10.0 major/minor line, and disables prerelease SDKs.
 - Shared properties enable nullable reference types, implicit usings, XML documentation, and build-time code style enforcement; language version is `latest`.
 - Runtime-specific assembly resolution uses conditional compilation, reflection, and unsafe accessors for .NET 8 and later.
-- The library references MinVer as a private build dependency; other package dependencies are not exposed to consumers.
+- Package versions use central package management (`Directory.Packages.props`, `ManagePackageVersionsCentrally=true`); test-only versions live in `tests/Directory.Packages.props`, which imports the root file. MinVer remains a private build dependency, and no package dependencies are exposed to consumers.
 - No Revit API package reference.
 
 ## Documentation layout
