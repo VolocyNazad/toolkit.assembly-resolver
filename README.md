@@ -10,6 +10,8 @@ Current implementation found at https://github.com/Nice3point/RevitToolkit
 - [Branching policy](docs/policies/branching.md)
 - [Commit message policy](docs/policies/commits.md)
 - [Changelog policy](docs/policies/changelog.md)
+- [Testing policy](docs/policies/testing.md)
+- [Benchmark policy](docs/policies/benchmarks.md)
 
 ## Contributing
 
