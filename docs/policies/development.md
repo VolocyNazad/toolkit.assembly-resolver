@@ -21,8 +21,8 @@ branch and a pull request.
 
 Keep [CHANGELOG.md](../../CHANGELOG.md) up to date as the [changelog policy](changelog.md) requires.
 
-Tests follow the [testing policy](testing.md): what needs a test, which Revit versions must be
-covered and how the headless and in-Revit suites are laid out. Performance work follows the
+Tests follow the [testing policy](testing.md): what needs a test, which configurations must be
+covered and how the test projects are laid out. Performance work follows the
 [benchmark policy](benchmarks.md).
 
 ## .NET SDK selection
@@ -51,4 +51,4 @@ removed managed files. Solution templates follow the same contract.
 Keep the root `.editorconfig` in the solution and apply its repository-wide encoding, line-ending and trailing-whitespace rules. Repository-specific sections may add stricter language rules. Update the file deliberately when formatting conventions change; do not replace specialized rules with the shared minimum.
 ## Test execution
 
-Projects using xUnit v3 4.0 run through Microsoft.Testing.Platform, selected in global.json. CI invokes each headless test project explicitly and treats a run with no discovered tests as a failure. Tests that require a running Revit process use the .RevitTests suffix and are excluded from hosted headless test runs.
+Projects using xUnit v3 4.0 run through Microsoft.Testing.Platform, selected in global.json. CI invokes each headless test project explicitly and treats a run with no discovered tests as a failure.
