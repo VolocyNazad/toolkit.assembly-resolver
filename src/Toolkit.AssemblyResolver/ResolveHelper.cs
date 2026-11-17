@@ -6,17 +6,43 @@ using System.Runtime.Loader;
 
 namespace Toolkit.AssemblyResolver;
 
+/// <summary>
+/// Provides disposable assembly resolution scopes that resolve assemblies from a stack of module
+/// directories and preserve the existing assembly resolution handlers.
+/// </summary>
 public static class ResolveHelper
 {
     private static readonly object ResolveLock = new();
     private static readonly Stack<string> ModuleDirectories = new();
     private static object? _domainResolvers;
 
+    /// <summary>
+    /// Begins an assembly resolution scope that searches the directory of the module that declares
+    /// <typeparamref name="T"/>.
+    /// </summary>
+    /// <typeparam name="T">A type whose module directory is added to the resolution stack.</typeparam>
+    /// <returns>A scope that restores the previous resolution state when it is disposed.</returns>
     public static IDisposable BeginAssemblyResolveScope<T>()
         => BeginAssemblyResolveScope(typeof(T));
 
+    /// <summary>
+    /// Begins an assembly resolution scope that searches the directory of the module that declares
+    /// <paramref name="type"/>.
+    /// </summary>
+    /// <param name="type">A type whose module directory is added to the resolution stack.</param>
+    /// <returns>
+    /// A scope that restores the previous resolution state when it is disposed, or an inert scope
+    /// when the module has no file on disk.
+    /// </returns>
+    /// <exception cref="ArgumentNullException"><paramref name="type"/> is <see langword="null"/>.</exception>
     public static IDisposable BeginAssemblyResolveScope(Type type)
     {
+#if NET8_0_OR_GREATER
+        ArgumentNullException.ThrowIfNull(type);
+#else
+        if (type is null) throw new ArgumentNullException(nameof(type));
+#endif
+
         if (type.Module.FullyQualifiedName == "<Unknown>")
             return DisposedAssemblyResolveScope.Instance;
 
@@ -27,6 +53,15 @@ public static class ResolveHelper
         return BeginAssemblyResolveScope(moduleDirectory);
     }
 
+    /// <summary>
+    /// Begins an assembly resolution scope that searches <paramref name="directory"/> for assemblies
+    /// that the default resolution cannot find.
+    /// </summary>
+    /// <param name="directory">The directory added to the resolution stack.</param>
+    /// <returns>
+    /// A scope that removes the directory from the stack when it is disposed, or an inert scope when
+    /// <paramref name="directory"/> is empty.
+    /// </returns>
     public static IDisposable BeginAssemblyResolveScope(string directory)
     {
         if (string.IsNullOrWhiteSpace(directory))

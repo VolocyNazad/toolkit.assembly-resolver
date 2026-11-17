@@ -1,7 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
 using Xunit;
 
 namespace Toolkit.AssemblyResolver.Tests;
 
+[SuppressMessage("Naming", "CA1707:Identifiers should not contain underscores", Justification = "Test names describe the behavior under test.")]
 public sealed class ResolveHelperTests
 {
     [Fact]
